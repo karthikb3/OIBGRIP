@@ -1,0 +1,102 @@
+import java.util.Scanner;
+
+public class ATM {
+    private static Scanner sc = new Scanner(System.in);
+    private static String userId = "user";
+    private static String userPin = "1234";
+    private static int balance = 1000;
+
+    public static void main(String[] args) {
+        System.out.println("Welcome to ATM");
+        while (true) {
+            System.out.print("Enter user ID: ");
+            String enteredUserId = sc.nextLine();
+            System.out.print("Enter user PIN: ");
+            String enteredUserPin = sc.nextLine();
+            if (enteredUserId.equals(userId) && enteredUserPin.equals(userPin)) {
+                System.out.println("Login successful.");
+                while (true) 
+                {
+                    System.out.println("1. Transactions History");
+                    System.out.println("2. Withdraw");
+                    System.out.println("3. Deposit");
+                    System.out.println("4. Transfer");
+                    System.out.println("5. Quit");
+                    System.out.print("Enter your choice: ");
+                    int choice = sc.nextInt();
+                    sc.nextLine();
+                    switch (choice)
+                    {
+                        case 1:
+                            transactionsHistory();
+                            break;
+                        case 2:
+                            withdraw();
+                            break;
+                        case 3:
+                            deposit();
+                            break;
+                        case 4:
+                            transfer();
+                            break;
+                        case 5:
+                            quit();
+                            return;
+                        default:
+                            System.out.println("Invalid choice.");
+                    }
+                }
+            } else {
+                System.out.println("LOGIN FAILED!");
+            }
+        }
+    }
+
+    private static void transactionsHistory() 
+    {
+        System.out.println("Transactions History: ");
+        System.out.println("Balance: " + balance);
+    }
+
+    private static void withdraw() 
+    {
+        System.out.print("Enter amount to withdraw: ");
+        int amount = sc.nextInt();
+        sc.nextLine();
+        if (balance >= amount) 
+        {
+            balance -= amount;
+            System.out.println("Withdraw successful.");
+        } else {
+            System.out.println("Insufficient balance.");
+        }
+    }
+
+    private static void deposit() 
+    {
+        System.out.print("Enter amount to deposit: ");
+        int amount = sc.nextInt();
+        sc.nextLine();
+        balance += amount;
+        System.out.println("DEPOSIT SUCCESSFULLY");
+    }
+
+    private static void transfer() {
+        System.out.print("Enter recipient's ID: ");
+        String recipientId = sc.nextLine();
+        System.out.print("Enter amount to transfer: ");
+        int amount = sc.nextInt();
+        sc.nextLine();
+        if (balance >= amount) {
+            balance -= amount;
+            System.out.println("Transfer successful.");
+        } else {
+            System.out.println("Insufficient balance.");
+        }
+    }
+
+    private static void quit() 
+    {
+        System.out.println("Thank you for using ATM.");
+    }
+}
